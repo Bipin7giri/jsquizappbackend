@@ -40,7 +40,7 @@ export class UsersController {
   @HasRoles(Role.ADMIN)
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Get('/all')
-  getUsers(@Paginate() query: PaginateQuery, @Request() req) {
+  getUsers(@Request() req) {
     return this.userService.findAll();
   }
 
@@ -78,7 +78,7 @@ export class UsersController {
   @UseGuards(AuthGuard('local'))
   @Post('/login')
   @UsePipes(ValidationPipe)
-  async loginSuperAdmin(@Request() req, @Body() loginDto: LoginDto) {
+  async loginSuperAdmin(@Request() req) {
     const result = await this.authService.login(req.user);
     const access_token = { access_token: result.access_token };
     return access_token;
