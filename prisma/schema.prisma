@@ -15,5 +15,12 @@ model User {
   email    String  @unique
   fullName String
   password String
-  isAdmin  Boolean
+  role String[]
+}
+model Documentation {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content    String  @unique
+  shortDescription String
+  description String
 }

@@ -9,8 +9,8 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Gadget')
-    .setDescription('Gadget')
+    .setTitle('JSQ')
+    .setDescription('JSQ')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

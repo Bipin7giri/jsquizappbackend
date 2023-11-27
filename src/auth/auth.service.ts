@@ -36,12 +36,11 @@ export class AuthService {
     const payload = {
       email: user.email,
       sub: user.id,
-      admin: user.isAdmin,
+      roles: user.role,
     };
-    console.log(payload);
     return {
       access_token: this.jwtService.sign(payload, { secret: 'test' }),
-      roleId: user.roleId,
+      roles: user.roles,
     };
     // return {
     //   access_token: this.jwtService.sign(payload),

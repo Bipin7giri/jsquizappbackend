@@ -33,7 +33,7 @@ const env = process.env.NODE_ENV;
     LocalStrategy,
     JwtStrategy,
     ImageUploadService,
-    PrismaService
+    PrismaService,
   ],
 })
-export class UsersModule { }
+export class UsersModule {}

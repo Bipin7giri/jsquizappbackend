@@ -1,38 +1,27 @@
 import {
   Body,
   Controller,
-  Get,
   Post,
   UseGuards,
   UsePipes,
   ValidationPipe,
   Request,
-  UnauthorizedException,
   UseInterceptors,
   UploadedFile,
-  Patch,
-  Param,
-  Delete,
+  Get,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import {
-  AdminAuto,
-  CreateUserDto,
-  LoginDto,
-} from '../users/dto/create-user.dto';
+import { CreateUserDto, LoginDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth/auth.service';
-import { HasRoles } from '../auth/has-roles.decorator';
-import { CurrentUser } from '../auth/current-user.decorator';
-import { RolesGuard } from '../auth/roles.guard';
-// import { Role } from './entities/user.entity';
-import { Role } from '../constants/roles.enum';
-import { Paginate, PaginateQuery } from 'nestjs-paginate';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { v2 as cloudinary } from 'cloudinary';
 import { ImageUploadService } from '../helper/imageupload.service';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Role } from 'src/constants/roles.enum';
+import { HasRoles } from 'src/auth/has-roles.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Paginate, PaginateQuery } from 'nestjs-paginate';
 cloudinary.config({
   cloud_name: 'dr54a7gze',
   api_key: '868275163814591',
@@ -48,12 +37,13 @@ export class UsersController {
     private imageUploadService: ImageUploadService,
   ) {}
 
-  // @HasRoles(Role.ADMIN)
-  // @UseGuards(AuthGuard('jwt'), RolesGuard)
-  // @Get('/all')
-  // getUsers(@Paginate() query: PaginateQuery, @Request() req) {
-  //   return this.userService.findAll(query);
-  // }
+  @HasRoles(Role.ADMIN)
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Get('/all')
+  getUsers(@Paginate() query: PaginateQuery, @Request() req) {
+    console.log(query);
+    return this.userService.findAll();
+  }
 
   // @HasRoles(Role.SuperAdmin)
   // @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -65,9 +55,6 @@ export class UsersController {
     @UploadedFile() file: Express.Multer.File,
     @Body() createUserDto: CreateUserDto,
   ) {
-    const imageuploadUrl = await this.imageUploadService.uploadImage(
-      file?.path,
-    );
     return this.userService.registerUser(createUserDto);
   }
 
@@ -98,16 +85,16 @@ export class UsersController {
     return access_token;
   }
 
-  @UseGuards(AuthGuard('local'))
-  @Post('auth/login')
-  @UsePipes(ValidationPipe)
-  async login(@Request() req, @Body() loginDto: LoginDto) {
-    const result = await this.authService.login(req.user);
-    const accessToken = {
-      access_token: result.access_token,
-    };
-    return accessToken;
-  }
+  // @UseGuards(AuthGuard('local'))
+  // @Post('auth/login')
+  // @UsePipes(ValidationPipe)
+  // async login(@Request() req, @Body() loginDto: LoginDto) {
+  //   const result = await this.authService.login(req.user);
+  //   const accessToken = {
+  //     access_token: result.access_token,
+  //   };
+  //   return accessToken;
+  // }
 
   // @UseGuards(AuthGuard('jwt'))
   // @Patch('/me')
