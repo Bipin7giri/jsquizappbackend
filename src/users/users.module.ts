@@ -10,7 +10,7 @@ import { LocalStrategy } from '../auth/local.strategy';
 import { JwtStrategy } from '../auth/jwt.strategy';
 import multer from 'multer';
 import * as dotenv from 'dotenv';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 dotenv.config();
 const env = process.env.NODE_ENV;
 @Module({

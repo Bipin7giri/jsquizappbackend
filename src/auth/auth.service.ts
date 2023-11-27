@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { HashService } from '../helper/hash.services';
 import * as dotenv from 'dotenv';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 dotenv.config();
 @Injectable()
 export class AuthService {

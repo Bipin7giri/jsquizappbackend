@@ -9,7 +9,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { HashService } from '../helper/hash.services';
 import { PaginateQuery, paginate, Paginated } from 'nestjs-paginate';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { User } from '@prisma/client';
 @Injectable()
 export class UsersService {
