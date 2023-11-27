@@ -41,7 +41,6 @@ export class UsersController {
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Get('/all')
   getUsers(@Paginate() query: PaginateQuery, @Request() req) {
-    console.log(query);
     return this.userService.findAll();
   }
 
