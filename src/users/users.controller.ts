@@ -18,9 +18,9 @@ import { AuthService } from '../auth/auth.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { v2 as cloudinary } from 'cloudinary';
 import { ImageUploadService } from '../helper/imageupload.service';
-import { Role } from 'src/constants/roles.enum';
-import { HasRoles } from 'src/auth/has-roles.decorator';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { Role } from '../constants/roles.enum';
+import { HasRoles } from '../auth/has-roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
 import { Paginate, PaginateQuery } from 'nestjs-paginate';
 cloudinary.config({
   cloud_name: 'dr54a7gze',
